@@ -18,7 +18,7 @@ public class PirateButton extends JCheckBox {
 	public PirateButton() {
 		ImageIcon icon = new ImageIcon("img\\iutblanc.png");
 		Image img = icon.getImage();  
-		Image newimg = img.getScaledInstance(150, 150,  java.awt.Image.SCALE_SMOOTH);  
+		Image newimg = img.getScaledInstance(160, 160,  java.awt.Image.SCALE_SMOOTH);  
 		ImageIcon newIcon = new ImageIcon(newimg);
 		
 		this.setIcon(newIcon);
