@@ -16,7 +16,7 @@ public class PirateButton extends JCheckBox {
 	private static final long serialVersionUID = 2239474966130365554L;
 
 	public PirateButton() {
-		ImageIcon icon = new ImageIcon("D:\\Utilisateurs\\Fred\\Mes documents\\Divers\\Chrome-extension\\newtab\\img\\iutbleu.png");
+		ImageIcon icon = new ImageIcon("img\\iutblanc.png");
 		Image img = icon.getImage();  
 		Image newimg = img.getScaledInstance(150, 150,  java.awt.Image.SCALE_SMOOTH);  
 		ImageIcon newIcon = new ImageIcon(newimg);
