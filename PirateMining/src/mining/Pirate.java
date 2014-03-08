@@ -1,11 +1,14 @@
-package Mining;
+package mining;
 
 import java.util.HashMap;
 
 public class Pirate {
 	private HashMap<String, Boolean> _attributes = new HashMap<String, Boolean>();
 	
-	private static final String[] attributesName = new String[]{"bidule", "truc"};
+	private static final String[] attributesName = new String[]{"bidule", "chose", "machin"};
+	//private static final String[] attributesName = new String[]{"bidule", "truc", "machin", "chose"};
+
+	boolean _isOk = false;
 	
 	public Pirate()
 	{
@@ -39,4 +42,15 @@ public class Pirate {
 	{
 		return attributesName;
 	}
+	
+	public void setOk(boolean ok)
+	{
+		_isOk = ok;
+	}
+	
+	public boolean isOk()
+	{
+		return _isOk;
+	}
+
 }

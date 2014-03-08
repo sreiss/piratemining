@@ -1,4 +1,4 @@
-package Mining;
+package mining;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -41,12 +41,16 @@ public class Mining {
 			  attributes.addElement(new Attribute(an, att));
 		  }
 		  
-		  
+		  FastVector att = new FastVector();
+		  att.addElement("yes");
+		  att.addElement("no");
+		  attributes.addElement(new Attribute("ok", att, 0));
 		  
 		 
 		     // 2. create Instances object
 		     _data = new Instances("MyRelation", attributes, 0);
-		     
+		     _data.setClassIndex(_data.numAttributes() - 1); 
+		     System.out.println(_data);
 		     for(Pirate pirate : pirates)
 		     {System.out.println(pirate);
 		    	 double[] vals = new double[_data.numAttributes()];
@@ -60,14 +64,21 @@ public class Mining {
 		    	 
 		    	 for(Entry<String, Boolean> entry : table.entrySet())
 		    	 {
-		    		 vals[i] = entry.getValue() ? 1 : 0;
+		    		 vals[i] = entry.getValue() ? 0 : 1;
+		    		 System.out.println(pirate + " :  " + vals[i]);
 		    		 i++;
 		    	 }
+		    	 
+		    	 
+		    	 vals[vals.length -1] = pirate.isOk() ? 0 : 1;
+		    	 
 		    	 _data.add(new Instance(1.0, vals));
-		    	 _data.add(new Instance(1.0, vals));
+		    	 //_data.add(new Instance(1.0, vals));
 		     }
 		     
-		     _data.setClassIndex(_data.numAttributes() - 1); 
+		    
+		     
+		     System.out.println(_data);
 	  }
 	  
 	  
@@ -112,11 +123,21 @@ public class Mining {
 		  ArrayList<Pirate> l = new ArrayList<Pirate>();
 		  Pirate p = new Pirate();
 		  p.setAttribute("bidule", true);
+		  p.setAttribute("chose", true);
+		  p.setOk(true);
 		  l.add(p);
 		  p = new Pirate();
-		  l.add(p);
-		  p.setAttribute("bidule", false);
 		  
+		  p.setAttribute("bidule", true);
+		  p.setAttribute("chose", false);
+		  p.setOk(true);
+		  l.add(p);
+		  p = new Pirate();
+		  
+		  p.setAttribute("bidule", false);
+		  p.setAttribute("chose", false);
+		  p.setOk(false);
+		  l.add(p);
 		  Mining m = new Mining();
 		  m.setPirates(l);
 		  m.evaluate();
