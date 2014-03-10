@@ -57,6 +57,25 @@ public class MainWindow extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		
+		try {
+	            // Set System L&F
+	        UIManager.setLookAndFeel(
+	        		UIManager.getSystemLookAndFeelClassName());
+	    } 
+	    catch (UnsupportedLookAndFeelException e) {
+	      
+	    }
+	    catch (ClassNotFoundException e) {
+	      
+	    }
+	    catch (InstantiationException e) {
+	      
+	    }
+	    catch (IllegalAccessException e) {
+	      
+	    }
+		
 		MainWindow m = new MainWindow();
 		m.setVisible(true);
 	}

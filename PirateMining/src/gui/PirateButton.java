@@ -7,8 +7,9 @@ import java.awt.event.ItemListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JToggleButton;
 
-public class PirateButton extends JCheckBox {
+public class PirateButton extends JToggleButton {
 	
 	/**
 	 * 
@@ -22,22 +23,22 @@ public class PirateButton extends JCheckBox {
 		ImageIcon newIcon = new ImageIcon(newimg);
 		
 		this.setIcon(newIcon);
-		this.setBackground(Color.RED);
-		this.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent arg0) {
-				changeBackground();
-			}
-		});
+//		this.setBackground(Color.RED);
+//		this.addItemListener(new ItemListener() {
+//			@Override
+//			public void itemStateChanged(ItemEvent arg0) {
+//				changeBackground();
+//			}
+//		});
 	}
 	
-	public void changeBackground() {
-		if (this.isSelected() == true) {
-			this.setBackground(Color.GREEN);
-		} else {
-			this.setBackground(Color.RED);
-		}
-	}
+//	public void changeBackground() {
+//		if (this.isSelected() == true) {
+//			this.setBackground(Color.GREEN);
+//		} else {
+//			this.setBackground(Color.RED);
+//		}
+//	}
 	
 	
 }
