@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import mining.Pirate;
+
 public class MainWindow extends JFrame {
 	
 	/**
@@ -25,10 +27,10 @@ public class MainWindow extends JFrame {
 		JLabel jlPir = new JLabel("Ces pirates sont-ils dans la classe ?");
 		this.add(jlPir, BorderLayout.NORTH);
 		
-		jpMain.setLayout(new GridLayout(4,4));
+		jpMain.setLayout(new GridLayout(4,5));
 		
-		for (int i = 0; i<16; i++) {
-			PirateButton pb = new PirateButton();
+		for (int i = 0; i<20; i++) {
+			PirateButton pb = new PirateButton(new Pirate());
 			jpMain.add(pb);
 		}
 		
@@ -49,8 +51,8 @@ public class MainWindow extends JFrame {
 
 		this.add(jpBottom, BorderLayout.SOUTH);
 		
-		this.setMinimumSize(new Dimension(1000, 1000));
-		this.setSize(1000, 1000);
+		this.setMinimumSize(new Dimension(1250, 1000));
+		this.setSize(1250, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
