@@ -1,6 +1,8 @@
 package mining;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class Pirate {
 	private HashMap<String, Boolean> _attributes = new HashMap<String, Boolean>();
@@ -33,6 +35,10 @@ public class Pirate {
 		_attributes.put(name, h);
 	}
 	
+	public boolean getAttributeValue(String name) {
+		return _attributes.get(name);
+	}
+	
 	static public int countAttributes()
 	{
 		return attributesName.length;
@@ -51,6 +57,29 @@ public class Pirate {
 	public boolean isOk()
 	{
 		return _isOk;
+	}
+	
+	public static Pirate randomPirate() {
+		Pirate p = new Pirate();
+		Random rnd = new Random();
+		for (Map.Entry<String, Boolean> entry : p.getTable().entrySet()) {
+			p.setAttribute(entry.getKey(), rnd.nextBoolean());
+		}
+		return p;
+	}
+
+	@Override
+	public boolean equals (Object obj) {
+		if (obj instanceof Pirate) {
+			Pirate p = (Pirate)obj;
+			for (Map.Entry<String, Boolean> entry : p.getTable().entrySet()) {
+				if (entry.getValue() != this.getAttributeValue(entry.getKey())) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

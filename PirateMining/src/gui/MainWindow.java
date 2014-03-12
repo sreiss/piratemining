@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -18,19 +20,32 @@ public class MainWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = -3596652768909677468L;
 	
-	private JPanel jpMain = new JPanel();
-	private JPanel jpBottom = new JPanel();
+	private ArrayList<PirateButton> buttons = new ArrayList<PirateButton>();
 	
 	public MainWindow() {
+		JPanel jpMain = new JPanel();
+		JPanel jpBottom = new JPanel();
+		
 		this.setLayout(new BorderLayout());
 		
 		JLabel jlPir = new JLabel("Ces pirates sont-ils dans la classe ?");
+		jlPir.setHorizontalAlignment(JLabel.CENTER);
 		this.add(jlPir, BorderLayout.NORTH);
 		
 		jpMain.setLayout(new GridLayout(4,5));
 		
+		
 		for (int i = 0; i<20; i++) {
-			PirateButton pb = new PirateButton(new Pirate());
+			boolean bool = true;
+			PirateButton pb = null;
+			while (bool) {
+				Pirate p = Pirate.randomPirate();
+				pb = new PirateButton(p);
+				if (!this.contains(pb)) {
+					bool = false;
+				}
+			}
+			buttons.add(pb);
 			jpMain.add(pb);
 		}
 		
@@ -55,7 +70,16 @@ public class MainWindow extends JFrame {
 		this.setSize(1250, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	
+	public boolean contains(PirateButton pb) {
+		for (PirateButton pbt : buttons) {
+			if (pbt.equals(pb)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		
 		try {

@@ -6,11 +6,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -31,7 +28,6 @@ public class PirateIcon {
 			e1.printStackTrace();
 		}
 		
-		BufferedImage bi = null;
 		for (Map.Entry<String, Boolean> entry : h.entrySet()) {
 			if (entry.getValue()) {
 				BufferedImage img2 = null;
@@ -40,26 +36,11 @@ public class PirateIcon {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				bi = PirateIcon.addImage(imgBase, img2);
+				imgBase = PirateIcon.addImage(imgBase, img2);
 			}
 		}
-		
-		
-		/**/
-		
-//		BufferedImage img = null;
-//		BufferedImage img2 = null;
-//		try {
-//			img = ImageIO.read(new File("img\\iutblanc.png"));
-//			img2 = ImageIO.read(new File("img\\ss4s.png"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		BufferedImage bi = PirateIcon.addImage(img, img2);
 
-
-		Image newimg = bi.getScaledInstance(160, 160,  java.awt.Image.SCALE_SMOOTH);  
+		Image newimg = imgBase.getScaledInstance(160, 160, Image.SCALE_SMOOTH);  
 		this.ii = new ImageIcon(newimg);
 	}
 	
@@ -79,15 +60,5 @@ public class PirateIcon {
 		g2d.dispose();
 	 
 		return image1 ;
-	}
-	
-	public String randomImage() {
-		Random rnd = new Random();
-		String s = "";
-		for (int i = 0; i<5; i++) {
-			s += rnd.nextInt(1);
-		}
-		s += ".png";
-		return s;
 	}
 }
