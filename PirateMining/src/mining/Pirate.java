@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Pirate {
 	private HashMap<String, Boolean> _attributes = new HashMap<String, Boolean>();
 	
-	private static final String[] attributesName = new String[]{"bidule", "chose", "machin"};
+	private static final String[] attributesName = new String[]{"bandeau", "chapeau", "dent", "barbe", "crochet", "perroquet"};
 	//private static final String[] attributesName = new String[]{"bidule", "truc", "machin", "chose"};
 
 	boolean _isOk = false;
