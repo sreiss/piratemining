@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.swing.*;
 
@@ -55,12 +54,6 @@ public class MainWindow extends JFrame {
 		
 		JButton jbValidate = new JButton("Valider");
 		JButton jbClose = new JButton("Fermer");
-		jbClose.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
 		jpBottom.add(jbValidate);
 		jpBottom.add(jbClose);
 
@@ -69,6 +62,13 @@ public class MainWindow extends JFrame {
 		this.setMinimumSize(new Dimension(1250, 1000));
 		this.setSize(1250, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		jbClose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 	}
 	
 	public boolean contains(PirateButton pb) {
@@ -83,22 +83,13 @@ public class MainWindow extends JFrame {
 	public static void main(String[] args) {
 		
 		try {
-	            // Set System L&F
 	        UIManager.setLookAndFeel(
 	        		UIManager.getSystemLookAndFeelClassName());
 	    } 
-	    catch (UnsupportedLookAndFeelException e) {
-	      
-	    }
-	    catch (ClassNotFoundException e) {
-	      
-	    }
-	    catch (InstantiationException e) {
-	      
-	    }
-	    catch (IllegalAccessException e) {
-	      
-	    }
+	    catch (UnsupportedLookAndFeelException e) { }
+	    catch (ClassNotFoundException e) { }
+	    catch (InstantiationException e) { }
+	    catch (IllegalAccessException e) { }
 		
 		MainWindow m = new MainWindow();
 		m.setVisible(true);

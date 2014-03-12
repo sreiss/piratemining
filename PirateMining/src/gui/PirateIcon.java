@@ -16,7 +16,7 @@ import mining.Pirate;
 
 public class PirateIcon {
 
-	private ImageIcon ii;
+	private ImageIcon icon;
 	
 	public PirateIcon(Pirate p) {
 		
@@ -41,11 +41,11 @@ public class PirateIcon {
 		}
 
 		Image newimg = imgBase.getScaledInstance(160, 160, Image.SCALE_SMOOTH);  
-		this.ii = new ImageIcon(newimg);
+		this.icon = new ImageIcon(newimg);
 	}
 	
 	public ImageIcon getImageIcon() {
-		return this.ii;
+		return this.icon;
 	}
 	
 	public static BufferedImage addImage(BufferedImage image1, BufferedImage image2){
