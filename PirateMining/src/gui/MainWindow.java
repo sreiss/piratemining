@@ -49,10 +49,8 @@ public class MainWindow extends JFrame {
 
 		this.add(jpBottom, BorderLayout.SOUTH);
 		
-		
-		
-		this.setMinimumSize(new Dimension(750, 750));
-		this.setSize(750, 750);
+		this.setMinimumSize(new Dimension(1000, 1000));
+		this.setSize(1000, 1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
