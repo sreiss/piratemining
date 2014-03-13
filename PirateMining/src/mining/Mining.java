@@ -51,9 +51,8 @@ public class Mining {
 		     // 2. create Instances object
 		     _data = new Instances("MyRelation", attributes, 0);
 		     _data.setClassIndex(_data.numAttributes() - 1); 
-		     System.out.println(_data);
 		     for(Pirate pirate : pirates)
-		     {System.out.println(pirate);
+		     {
 		    	 double[] vals = new double[_data.numAttributes()];
 		    	 
 		    	 HashMap<String, Boolean> table = pirate.getTable();
@@ -63,10 +62,9 @@ public class Mining {
 		    	 
 		    	 //ins.
 		    	 
-		    	 for(Entry<String, Boolean> entry : table.entrySet())
-		    	 {
-		    		 vals[i] = entry.getValue() ? 0 : 1;
-		    		 System.out.println(pirate + " :  " + vals[i]);
+		    	 for(String an : attributeNames)
+				  {
+		    		 vals[i] = table.get(an) ? 0 : 1;
 		    		 i++;
 		    	 }
 		    	 
@@ -90,14 +88,43 @@ public class Mining {
 		  try {
 			cls.buildClassifier(_data);
 			
+		     String graph = ((J48) cls).graph();
+		     
+		     String newGraph  = "";
+		     String[] lines = graph.split(System.getProperty("line.separator"));
+		     int i=0;
+		     for(String line : lines)
+		     {
+		    	 if(!line.contains("true") && !line.contains("false"))
+		    	 {
+		    		 String newLine;
+		    		 if(line.startsWith("N"))
+		    		 {
+		    			 newLine = "N" + i + " " + line.substring(line.indexOf(' '));
+		    			 i++;
+		    		 } else {
+		    			 newLine = line;
+		    		 }
+		    		 newGraph += newLine + "\n";
+		    	 }
+		     }
 
+
+		     
+	     
+		     
+		     
+		     
+		     
+		     
+		     
 		     // display classifier
 		     final javax.swing.JFrame jf = 
 		       new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
 		     jf.setSize(500,400);
 		     jf.getContentPane().setLayout(new BorderLayout());
 		     TreeVisualizer tv = new TreeVisualizer(null,
-		         ((J48) cls).graph(),
+		         graph,
 		         new PlaceNode2());
 		     jf.getContentPane().add(tv, BorderLayout.CENTER);
 		     jf.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -105,6 +132,7 @@ public class Mining {
 		         jf.dispose();
 		       }
 		     });
+
 		 
 		     jf.setVisible(true);
 		     tv.fitToScreen();
@@ -126,7 +154,7 @@ public class Mining {
 		  for(int i=0; i<20; i++)
 		  {
 			  Pirate p = Pirate.randomPirate();
-			  p.setOk(r.nextBoolean());
+			  p.setOk(r.nextInt(100) > 70 );
 			  liste.add(p);
 		  }
 		  
