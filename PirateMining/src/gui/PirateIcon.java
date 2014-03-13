@@ -23,7 +23,7 @@ public class PirateIcon {
 		HashMap<String, Boolean> h = p.getTable();
 		BufferedImage imgBase = null;
 		try {
-			imgBase = ImageIO.read(new File("img\\base.png"));
+			imgBase = ImageIO.read(new File("img/base.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -32,7 +32,7 @@ public class PirateIcon {
 			if (entry.getValue()) {
 				BufferedImage img2 = null;
 				try {
-					img2 = ImageIO.read(new File("img\\"+entry.getKey()+".png"));
+					img2 = ImageIO.read(new File("img/"+entry.getKey()+".png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
