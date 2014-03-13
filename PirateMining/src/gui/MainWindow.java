@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import mining.Mining;
 import mining.Pirate;
 
 public class MainWindow extends JFrame {
@@ -32,7 +33,6 @@ public class MainWindow extends JFrame {
 		this.add(jlPir, BorderLayout.NORTH);
 		
 		jpMain.setLayout(new GridLayout(4,5));
-		
 		
 		for (int i = 0; i<20; i++) {
 			boolean bool = true;
@@ -67,6 +67,21 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+		
+		jbValidate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Pirate> al = new ArrayList<Pirate>();
+				for (PirateButton pb : buttons) {
+					Pirate p = pb.getPirate();
+					p.setOk(pb.isSelected());
+					al.add(p);
+				}
+				Mining m = new Mining();
+				m.setPirates(al);
+				m.evaluate();
 			}
 		});
 	}

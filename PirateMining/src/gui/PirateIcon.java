@@ -29,7 +29,7 @@ public class PirateIcon {
 		}
 		
 		for (Map.Entry<String, Boolean> entry : h.entrySet()) {
-			if (entry.getValue()) {
+			if (entry.getValue() && !entry.getKey().equals("chapeau")) {
 				BufferedImage img2 = null;
 				try {
 					img2 = ImageIO.read(new File("img/"+entry.getKey()+".png"));
@@ -38,9 +38,26 @@ public class PirateIcon {
 				}
 				imgBase = PirateIcon.addImage(imgBase, img2);
 			}
+			if (entry.getKey().equals("chapeau")) {
+				BufferedImage img2 = null;
+				if (entry.getValue()) {
+					try {
+						img2 = ImageIO.read(new File("img/chapeau_noir.png"));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					try {
+						img2 = ImageIO.read(new File("img/chapeau_rouge.png"));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				imgBase = PirateIcon.addImage(imgBase, img2);
+			}
 		}
 
-		Image newimg = imgBase.getScaledInstance(150, 150, Image.SCALE_SMOOTH);  
+		Image newimg = imgBase.getScaledInstance(200, 200, Image.SCALE_SMOOTH);  
 		this.icon = new ImageIcon(newimg);
 	}
 	
