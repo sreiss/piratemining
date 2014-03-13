@@ -12,6 +12,7 @@ import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.Debug.Random;
 import weka.gui.treevisualizer.PlaceNode2;
 import weka.gui.treevisualizer.TreeVisualizer;
 
@@ -120,26 +121,17 @@ public class Mining {
 	  
 	  public static void main(String[] args)
 	  {
-		  ArrayList<Pirate> l = new ArrayList<Pirate>();
-		  Pirate p = new Pirate();
-		  p.setAttribute("bidule", true);
-		  p.setAttribute("chose", true);
-		  p.setOk(true);
-		  l.add(p);
-		  p = new Pirate();
+		  ArrayList<Pirate> liste = new ArrayList<Pirate>();
+		  Random r = new Random();
+		  for(int i=0; i<20; i++)
+		  {
+			  Pirate p = Pirate.randomPirate();
+			  p.setOk(r.nextBoolean());
+			  liste.add(p);
+		  }
 		  
-		  p.setAttribute("bidule", true);
-		  p.setAttribute("chose", false);
-		  p.setOk(true);
-		  l.add(p);
-		  p = new Pirate();
-		  
-		  p.setAttribute("bidule", false);
-		  p.setAttribute("chose", false);
-		  p.setOk(false);
-		  l.add(p);
 		  Mining m = new Mining();
-		  m.setPirates(l);
+		  m.setPirates(liste);
 		  m.evaluate();
 	  }
 	  
