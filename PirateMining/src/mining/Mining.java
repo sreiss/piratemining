@@ -1,6 +1,7 @@
 package mining;
 
 import java.awt.BorderLayout;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,7 +11,9 @@ import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.gui.treevisualizer.Node;
 import weka.gui.treevisualizer.PlaceNode2;
+import weka.gui.treevisualizer.TreeBuild;
 import weka.gui.treevisualizer.TreeVisualizer;
 
 public class Mining {
@@ -69,6 +72,16 @@ public class Mining {
 		System.out.println(_data); //Debug, affichage ARFF
 	}
 
+	
+	public void explainGraph(Node n)
+	{
+		Node child1 = n.getChild(0).getTarget();
+		Node child2 = n.getChild(1).getTarget();
+		
+		Node srcYes = (child1.getLabel().contains("yes")) ? child1 : child2;
+
+	
+	}
 
 	public void evaluate()
 	{
@@ -76,9 +89,16 @@ public class Mining {
 		Classifier cls = new J48();
 		try {
 			cls.buildClassifier(_data); //On lui donne les données
-
 			String graph = ((J48) cls).graph(); //Génération du graphique format text
 
+			System.out.println(graph);
+			
+
+			
+			TreeBuild build = new TreeBuild();
+			Node node = build.create(new StringReader(graph));
+			System.out.println(node.getChild(0).getLabel());
+			
 			//Affichage du graphique
 			final javax.swing.JFrame jf = 
 					new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
