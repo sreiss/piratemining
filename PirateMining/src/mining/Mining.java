@@ -78,9 +78,39 @@ public class Mining {
 		Node child1 = n.getChild(0).getTarget();
 		Node child2 = n.getChild(1).getTarget();
 		
-		Node srcYes = (child1.getLabel().contains("yes")) ? child1 : child2;
-
+		Node srcTrue = (n.getChild(0).getLabel().contains("true")) ? child1 : child2;
+		Node srcFalse = (srcTrue == child1) ? child2 : child1;
 	
+		if(srcTrue.getLabel().contains("yes"))
+		{
+			System.out.println("il doit y avoir un " + n.getLabel());
+			
+			if(!srcFalse.getLabel().contains("no"))
+			{
+				System.out.println("sinon : ");
+				explainGraph(srcFalse);
+			}
+		} else if(srcFalse.getLabel().contains("yes")) {
+			
+			System.out.println("il ne doit pas y avoir un " + n.getLabel());
+			
+			if(!srcTrue.getLabel().contains("no"))
+			{
+				System.out.println("sinon : ");
+				explainGraph(srcTrue);
+			}
+		} else if(!srcTrue.getLabel().contains("no")) {
+			System.out.println("il doit y avoir un " + n.getLabel() + " ainsi que : ");
+			explainGraph(srcTrue);
+			if(!srcFalse.getLabel().contains("no"))
+			{
+				System.out.println("mais s'il y a un " + n.getLabel() + " alors : ");
+				explainGraph(srcFalse);
+			}
+		} else {
+			System.out.println("il ne doit pas y avoir de " + n.getLabel() + " ainsi que :");
+			explainGraph(srcFalse);
+		}
 	}
 
 	public void evaluate()
@@ -98,6 +128,8 @@ public class Mining {
 			TreeBuild build = new TreeBuild();
 			Node node = build.create(new StringReader(graph));
 			System.out.println(node.getChild(0).getLabel());
+			
+			explainGraph(node);
 			
 			//Affichage du graphique
 			final javax.swing.JFrame jf = 
