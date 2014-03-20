@@ -57,7 +57,7 @@ public class PirateIcon {
 			}
 		}
 
-		Image newimg = imgBase.getScaledInstance(200, 200, Image.SCALE_SMOOTH);  
+		Image newimg = imgBase.getScaledInstance(190, 190, Image.SCALE_SMOOTH);  
 		this.icon = new ImageIcon(newimg);
 	}
 	
