@@ -53,8 +53,10 @@ public class MainWindow extends JFrame {
 		jpBottom.setLayout(new FlowLayout());
 		
 		JButton jbValidate = new JButton("Valider");
+		JButton jbReinit = new JButton("Réinitialiser");
 		JButton jbClose = new JButton("Fermer");
 		jpBottom.add(jbValidate);
+		jpBottom.add(jbReinit);
 		jpBottom.add(jbClose);
 
 		this.add(jpBottom, BorderLayout.SOUTH);
@@ -71,18 +73,40 @@ public class MainWindow extends JFrame {
 			}
 		});
 		
+		jbReinit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (PirateButton pb : buttons) {
+					pb.setSelected(false);
+				}
+			}
+		});
+		
 		jbValidate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// Affichage d'un message d'erreur si aucun pirate n'est sélectionné
 				ArrayList<Pirate> al = new ArrayList<Pirate>();
+				int nbSelected = 0;
 				for (PirateButton pb : buttons) {
 					Pirate p = pb.getPirate();
 					p.setOk(pb.isSelected());
+					if(pb.isSelected())
+						nbSelected++;
 					al.add(p);
 				}
-				Mining m = new Mining();
-				m.setPirates(al);
-				m.evaluate();
+				if (nbSelected == 0) {
+					JOptionPane.showMessageDialog(
+							MainWindow.this, 
+							"Vous n'avez rien sélectionné, moussaillon !", 
+							"Arrrrr !", 
+							JOptionPane.WARNING_MESSAGE
+					);
+				} else {
+					Mining m = new Mining();
+					m.setPirates(al);
+					m.evaluate();
+				}
 			}
 		});
 	}
