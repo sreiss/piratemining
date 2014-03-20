@@ -106,6 +106,15 @@ public class MainWindow extends JFrame {
 					Mining m = new Mining();
 					m.setPirates(al);
 					m.evaluate();
+					
+					if (!m.isRepresentative()) {
+						JOptionPane.showMessageDialog(
+							MainWindow.this,
+							"Les sélection n'est pas représentative.",
+							"Aïe, Aïe, Aïe...",
+							JOptionPane.WARNING_MESSAGE
+						);
+					}
 				}
 			}
 		});

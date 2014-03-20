@@ -19,8 +19,6 @@ public class Mining {
 	/** Les données Weka */
 	private Instances _data = null;
 
-
-
 	public void setPirates(ArrayList<Pirate> pirates)
 	{
 		//Génération des attributs
@@ -80,36 +78,44 @@ public class Mining {
 			cls.buildClassifier(_data); //On lui donne les données
 
 			String graph = ((J48) cls).graph(); //Génération du graphique format text
-
-			//Affichage du graphique
-			final javax.swing.JFrame jf = 
-					new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
-			jf.setSize(500,400);
-			jf.getContentPane().setLayout(new BorderLayout());
-			TreeVisualizer tv = new TreeVisualizer(null,
-					graph,
-					new PlaceNode2());
-			jf.getContentPane().add(tv, BorderLayout.CENTER);
-			jf.addWindowListener(new java.awt.event.WindowAdapter() {
-				public void windowClosing(java.awt.event.WindowEvent e) {
-					jf.dispose();
-				}
-			});
 			
-			// Centrage de l'affichage
-			Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-			jf.setLocation(
-					(int) ((d.getWidth() - jf.getWidth())/2),
-					(int) ((d.getHeight() - jf.getHeight())/2)
-			);
-
-			jf.setVisible(true);
-			tv.fitToScreen();
+			if (this.isRepresentative()) {
+				//Affichage du graphique
+				final javax.swing.JFrame jf = 
+						new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
+				jf.setSize(500,400);
+				jf.getContentPane().setLayout(new BorderLayout());
+				TreeVisualizer tv = new TreeVisualizer(null,
+						graph,
+						new PlaceNode2());
+				jf.getContentPane().add(tv, BorderLayout.CENTER);
+				jf.addWindowListener(new java.awt.event.WindowAdapter() {
+					public void windowClosing(java.awt.event.WindowEvent e) {
+						jf.dispose();
+					}
+				});
+			
+				// Centrage de l'affichage
+				Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+				jf.setLocation(
+						(int) ((d.getWidth() - jf.getWidth())/2),
+						(int) ((d.getHeight() - jf.getHeight())/2)
+				);
+	
+				jf.setVisible(true);
+				tv.fitToScreen();
+			}
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 
+	}
+	
+	public boolean isRepresentative() {
+		
+		// TODO
+		
+		return true;
 	}
 
 }
