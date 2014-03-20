@@ -62,6 +62,7 @@ public class MainWindow extends JFrame {
 		this.setMinimumSize(new Dimension(1000, 750));
 		this.setSize(1000, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		jbClose.addActionListener(new ActionListener() {
 			@Override
