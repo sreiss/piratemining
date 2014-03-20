@@ -1,6 +1,8 @@
 package mining;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -93,7 +95,13 @@ public class Mining {
 					jf.dispose();
 				}
 			});
-
+			
+			// Centrage de l'affichage
+			Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+			jf.setLocation(
+					(int) ((d.getWidth() - jf.getWidth())/2),
+					(int) ((d.getHeight() - jf.getHeight())/2)
+			);
 
 			jf.setVisible(true);
 			tv.fitToScreen();
