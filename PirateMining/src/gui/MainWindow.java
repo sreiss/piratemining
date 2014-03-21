@@ -21,9 +21,9 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = -3596652768909677468L;
 	
 	private ArrayList<PirateButton> buttons = new ArrayList<PirateButton>();
+	private JPanel jpMain = new JPanel();
 	
 	public MainWindow() {
-		JPanel jpMain = new JPanel();
 		JPanel jpBottom = new JPanel();
 		
 		this.setLayout(new BorderLayout());
@@ -32,31 +32,21 @@ public class MainWindow extends JFrame {
 		jlPir.setHorizontalAlignment(JLabel.CENTER);
 		this.add(jlPir, BorderLayout.NORTH);
 		
-		jpMain.setLayout(new GridLayout(4,5));
+		this.jpMain.setLayout(new GridLayout(4,5));
 		
-		for (int i = 0; i<20; i++) {
-			boolean bool = true;
-			PirateButton pb = null;
-			while (bool) {
-				Pirate p = Pirate.randomPirate();
-				pb = new PirateButton(p);
-				if (!this.contains(pb)) {
-					bool = false;
-				}
-			}
-			buttons.add(pb);
-			jpMain.add(pb);
-		}
+		this.randomPirateButtons(20);
 		
-		this.add(jpMain, BorderLayout.CENTER);
+		this.add(this.jpMain, BorderLayout.CENTER);
 		
 		jpBottom.setLayout(new FlowLayout());
 		
 		JButton jbValidate = new JButton("Valider");
 		JButton jbReinit = new JButton("Réinitialiser");
+		JButton jbRegen = new JButton("Régénérer");
 		JButton jbClose = new JButton("Fermer");
 		jpBottom.add(jbValidate);
 		jpBottom.add(jbReinit);
+		jpBottom.add(jbRegen);
 		jpBottom.add(jbClose);
 
 		this.add(jpBottom, BorderLayout.SOUTH);
@@ -70,6 +60,15 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+		
+		jbRegen.addActionListener(new ActionListener() {
+			@Override 
+			public void actionPerformed(ActionEvent e) {
+				MainWindow.this.buttons.clear();
+				MainWindow.this.jpMain.removeAll();
+				MainWindow.this.randomPirateButtons(20);
 			}
 		});
 		
@@ -118,6 +117,23 @@ public class MainWindow extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public void randomPirateButtons(int n) {
+		for (int i = 0; i<n; i++) {
+			boolean bool = true;
+			PirateButton pb = null;
+			while (bool) {
+				Pirate p = Pirate.randomPirate();
+				pb = new PirateButton(p);
+				if (!this.contains(pb)) {
+					bool = false;
+				}
+			}
+			this.buttons.add(pb);
+			this.jpMain.add(pb);
+		}
+		this.jpMain.updateUI();
 	}
 	
 	public boolean contains(PirateButton pb) {
