@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,6 +25,15 @@ public class MainWindow extends JFrame {
 	private JPanel jpMain = new JPanel();
 	
 	public MainWindow() {
+		// Setting app icon 
+		ArrayList<Image> appIcons = new ArrayList<Image>();
+		appIcons.add(new ImageIcon("img/app_icon/16x16.png").getImage());
+		appIcons.add(new ImageIcon("img/app_icon/32x32.png").getImage());
+		appIcons.add(new ImageIcon("img/app_icon/64x64.png").getImage());
+		appIcons.add(new ImageIcon("img/app_icon/128x128.png").getImage());
+		appIcons.add(new ImageIcon("img/app_icon/256x256.png").getImage());
+		this.setIconImages(appIcons);
+		
 		JPanel jpBottom = new JPanel();
 		
 		this.setLayout(new BorderLayout());
