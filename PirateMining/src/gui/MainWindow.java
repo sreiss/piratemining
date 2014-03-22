@@ -25,14 +25,15 @@ public class MainWindow extends JFrame {
 	private JPanel jpMain = new JPanel();
 	
 	public MainWindow() {
-		// Setting app icon 
+		// Setting app icon and title
 		ArrayList<Image> appIcons = new ArrayList<Image>();
 		appIcons.add(new ImageIcon("img/app_icon/16x16.png").getImage());
 		appIcons.add(new ImageIcon("img/app_icon/32x32.png").getImage());
 		appIcons.add(new ImageIcon("img/app_icon/64x64.png").getImage());
 		appIcons.add(new ImageIcon("img/app_icon/128x128.png").getImage());
 		appIcons.add(new ImageIcon("img/app_icon/256x256.png").getImage());
-		this.setIconImages(appIcons);
+		super.setIconImages(appIcons);
+		super.setTitle("Pirate Mining");
 		
 		JPanel jpBottom = new JPanel();
 		
