@@ -52,8 +52,8 @@ public class MainWindow extends JFrame {
 		jpBottom.setLayout(new FlowLayout());
 		
 		JButton jbValidate = new JButton("Valider");
-		JButton jbReinit = new JButton("Rï¿½initialiser");
-		JButton jbRegen = new JButton("Rï¿½gï¿½nï¿½rer");
+		JButton jbReinit = new JButton("Réinitialiser");
+		JButton jbRegen = new JButton("Regénérer");
 		JButton jbClose = new JButton("Fermer");
 		jpBottom.add(jbValidate);
 		jpBottom.add(jbReinit);
@@ -108,7 +108,7 @@ public class MainWindow extends JFrame {
 				if (nbSelected == 0) {
 					JOptionPane.showMessageDialog(
 							MainWindow.this, 
-							"Vous n'avez rien sï¿½lectionnï¿½, moussaillon !", 
+							"Vous n'avez rien sélectionné, moussaillon !", 
 							"Arrrrr !", 
 							JOptionPane.WARNING_MESSAGE
 					);
