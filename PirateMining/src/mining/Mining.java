@@ -115,7 +115,7 @@ public class Mining {
 				jf.setVisible(true);
 				tv.fitToScreen();
 			} else {
-				JOptionPane.showMessageDialog(null, "Le choix n'est pas assez reprÃ©sentatif..", "Arbre", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Le choix n'est pas assez représentatif..", "Arbre", JOptionPane.ERROR_MESSAGE);
 
 			}
 		} catch (Exception e) {
