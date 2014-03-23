@@ -52,8 +52,8 @@ public class MainWindow extends JFrame {
 		jpBottom.setLayout(new FlowLayout());
 		
 		JButton jbValidate = new JButton("Valider");
-		JButton jbReinit = new JButton("Réinitialiser");
-		JButton jbRegen = new JButton("Régénérer");
+		JButton jbReinit = new JButton("Rï¿½initialiser");
+		JButton jbRegen = new JButton("Rï¿½gï¿½nï¿½rer");
 		JButton jbClose = new JButton("Fermer");
 		jpBottom.add(jbValidate);
 		jpBottom.add(jbReinit);
@@ -95,7 +95,7 @@ public class MainWindow extends JFrame {
 		jbValidate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Affichage d'un message d'erreur si aucun pirate n'est sélectionné
+				// Affichage d'un message d'erreur si aucun pirate n'est sï¿½lectionnï¿½
 				ArrayList<Pirate> al = new ArrayList<Pirate>();
 				int nbSelected = 0;
 				for (PirateButton pb : buttons) {
@@ -108,7 +108,7 @@ public class MainWindow extends JFrame {
 				if (nbSelected == 0) {
 					JOptionPane.showMessageDialog(
 							MainWindow.this, 
-							"Vous n'avez rien sélectionné, moussaillon !", 
+							"Vous n'avez rien sï¿½lectionnï¿½, moussaillon !", 
 							"Arrrrr !", 
 							JOptionPane.WARNING_MESSAGE
 					);
@@ -116,15 +116,7 @@ public class MainWindow extends JFrame {
 					Mining m = new Mining();
 					m.setPirates(al);
 					m.evaluate();
-					
-					if (!m.isRepresentative()) {
-						JOptionPane.showMessageDialog(
-							MainWindow.this,
-							"Les sélection n'est pas représentative.",
-							"Aïe, Aïe, Aïe...",
-							JOptionPane.WARNING_MESSAGE
-						);
-					}
+
 				}
 			}
 		});

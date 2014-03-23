@@ -3,8 +3,11 @@ package mining;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.swing.JOptionPane;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.trees.J48;
@@ -12,7 +15,9 @@ import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.gui.treevisualizer.Node;
 import weka.gui.treevisualizer.PlaceNode2;
+import weka.gui.treevisualizer.TreeBuild;
 import weka.gui.treevisualizer.TreeVisualizer;
 
 public class Mining {
@@ -79,7 +84,12 @@ public class Mining {
 
 			String graph = ((J48) cls).graph(); //Génération du graphique format text
 			
-			if (this.isRepresentative()) {
+			TreeBuild build = new TreeBuild();
+			Node node = build.create(new StringReader(graph));
+			
+			
+			
+			if (node.getChild(0) != null) {//est représentatif
 				//Affichage du graphique
 				final javax.swing.JFrame jf = 
 						new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
@@ -104,6 +114,9 @@ public class Mining {
 	
 				jf.setVisible(true);
 				tv.fitToScreen();
+			} else {
+				JOptionPane.showMessageDialog(null, "Le choix n'est pas assez représentatif..", "Arbre", JOptionPane.ERROR_MESSAGE);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,11 +124,6 @@ public class Mining {
 
 	}
 	
-	public boolean isRepresentative() {
-		
-		// TODO
-		
-		return true;
-	}
+
 
 }
