@@ -1,15 +1,17 @@
 package mining;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Pirate {
+public class Pirate implements Cloneable {
 	private HashMap<String, Boolean> _attributes = new HashMap<String, Boolean>();
 	
 	private static final String[] attributesName = new String[]{"bandeau", "chapeau", "dent", "barbe", "crochet", "epee"};
-	//private static final String[] attributesName = new String[]{"bidule", "truc", "machin", "chose"};
 
+	private static Random _rand = new Random();
+	
 	boolean _isOk = false;
 	
 	public Pirate()
@@ -61,12 +63,29 @@ public class Pirate {
 	
 	public static Pirate randomPirate() {
 		Pirate p = new Pirate();
-		Random rnd = new Random();
+		
 		for (Map.Entry<String, Boolean> entry : p.getTable().entrySet()) {
-			p.setAttribute(entry.getKey(), rnd.nextBoolean());
+			p.setAttribute(entry.getKey(), _rand.nextBoolean());
 		}
 		return p;
 	}
+	
+	/*public static ArrayList<Pirate> getPirates(int N)
+	{
+		ArrayList<Pirate> res = new ArrayList<Pirate>();
+		
+		int attIndex = 0;
+		
+		Pirate lastPirate = new Pirate();
+		
+		for(int i=0; i<N; i++)
+		{
+			Pirate p = (Pirate) lastPirate.clone();
+			p._attributes[attributesName[attIndex]] = i;
+		}
+		
+		return res;
+	}*/
 
 	@Override
 	public boolean equals (Object obj) {
@@ -80,6 +99,14 @@ public class Pirate {
 			return true;
 		}
 		return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object clone() {
+		Pirate p = new Pirate();
+		p._attributes = (HashMap<String, Boolean>) this._attributes.clone();
+		return p;
 	}
 
 }
