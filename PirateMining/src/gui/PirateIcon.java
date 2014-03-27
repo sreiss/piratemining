@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +22,7 @@ public class PirateIcon {
 		HashMap<String, Boolean> h = p.getTable();
 		BufferedImage imgBase = null;
 		try {
-			imgBase = ImageIO.read(new File("img/base.png"));
+			imgBase = ImageIO.read(getClass().getResource("/img/base.png"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -32,7 +31,7 @@ public class PirateIcon {
 			if (entry.getValue() && !entry.getKey().equals("chapeau")) {
 				BufferedImage img2 = null;
 				try {
-					img2 = ImageIO.read(new File("img/"+entry.getKey()+".png"));
+					img2 = ImageIO.read(getClass().getResource("/img/"+entry.getKey()+".png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -42,13 +41,13 @@ public class PirateIcon {
 				BufferedImage img2 = null;
 				if (entry.getValue()) {
 					try {
-						img2 = ImageIO.read(new File("img/chapeau_noir.png"));
+						img2 = ImageIO.read(getClass().getResource("/img/chapeau_noir.png"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} else {
 					try {
-						img2 = ImageIO.read(new File("img/chapeau_rouge.png"));
+						img2 = ImageIO.read(getClass().getResource("/img/chapeau_rouge.png"));
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
