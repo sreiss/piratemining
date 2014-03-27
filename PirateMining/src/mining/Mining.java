@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import weka.classifiers.Classifier;
@@ -23,6 +24,8 @@ import weka.gui.treevisualizer.TreeVisualizer;
 public class Mining {
 	/** Les données Weka */
 	private Instances _data = null;
+	
+	private String _explanation;
 
 	public void setPirates(ArrayList<Pirate> pirates)
 	{
@@ -74,6 +77,46 @@ public class Mining {
 		System.out.println(_data); //Debug, affichage ARFF
 	}
 
+	public void explainGraph(Node n, StringBuffer str)
+	{
+		Node child1 = n.getChild(0).getTarget();
+		Node child2 = n.getChild(1).getTarget();
+		
+		Node srcTrue = (n.getChild(0).getLabel().contains("true")) ? child1 : child2;
+		Node srcFalse = (srcTrue == child1) ? child2 : child1;
+	
+		if(srcTrue.getLabel().contains("yes"))
+		{
+			str.append("il doit y avoir " + n.getLabel());
+			
+			if(!srcFalse.getLabel().contains("no"))
+			{
+				str.append(", sinon : ");
+				explainGraph(srcFalse, str);
+			}
+		} else if(srcFalse.getLabel().contains("yes")) {
+			
+			str.append(" il ne doit pas y avoir " + n.getLabel());
+			
+			if(!srcTrue.getLabel().contains("no"))
+			{
+				str.append(" sinon : ");
+				explainGraph(srcTrue, str);
+			}
+		} else if(!srcTrue.getLabel().contains("no")) {
+			str.append(" il doit y avoir " + n.getLabel() + " ainsi que : ");
+			explainGraph(srcTrue, str);
+			if(!srcFalse.getLabel().contains("no"))
+			{
+				str.append(" mais s'il y a " + n.getLabel() + " alors : ");
+				explainGraph(srcFalse, str);
+			}
+		} else {
+			str.append(" il ne doit pas y avoir de " + n.getLabel() + " ainsi que :");
+			explainGraph(srcFalse, str);
+		}
+	}
+
 
 	public void evaluate()
 	{
@@ -87,6 +130,14 @@ public class Mining {
 			TreeBuild build = new TreeBuild();
 			Node node = build.create(new StringReader(graph));
 			
+			try {
+				StringBuffer buffer = new StringBuffer();
+				explainGraph(node, buffer);
+				_explanation = buffer.toString();
+			} catch(Exception e)
+			{
+				_explanation = "";
+			}
 			
 			
 			if (node.getChild(0) != null) {//est représentatif
@@ -99,6 +150,7 @@ public class Mining {
 						graph,
 						new PlaceNode2());
 				jf.getContentPane().add(tv, BorderLayout.CENTER);
+				jf.getContentPane().add(new JLabel("<html>"+getExplanation()+"</html>"), BorderLayout.SOUTH);
 				jf.addWindowListener(new java.awt.event.WindowAdapter() {
 					public void windowClosing(java.awt.event.WindowEvent e) {
 						jf.dispose();
@@ -115,7 +167,7 @@ public class Mining {
 				jf.setVisible(true);
 				tv.fitToScreen();
 			} else {
-				JOptionPane.showMessageDialog(null, "Le choix n'est pas assez repr�sentatif..", "Arbre", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Le choix n'est pas assez repr�sentatif..", "Arbre", JOptionPane.ERROR_MESSAGE);
 
 			}
 		} catch (Exception e) {
@@ -124,6 +176,11 @@ public class Mining {
 
 	}
 	
+	
+	public String getExplanation()
+	{
+		return "explication expérimentale : "+_explanation;
+	}
 
 
 }
